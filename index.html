@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>CloudFlareJS</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>CloudFlareJS</h1>
+        <p>A JavaScript loader and utilies</p>
+      </header>
+      <section>
+        <p>CloudFlareJS is a robust and highly performant API for placing your JavaScript on the page and safely resolving all of its dependencies.</p>
+        <h2>API Documentation (BETA)</h2>
+        <h3>CloudFlare.require</h3>
+        <p>The require function is used when you want to retrieve and make use of modules. You give it a list of modules, and a callback which will get called when those modules are done being retrieved. Scripts corresponding to the list of modules requested are guaranteed to load asynchronously, and in as few requests as possible.</p>
+        <pre><code class="javascript">CloudFlare.require(modules, callback);</code></pre>
+        <ul>
+          <li><b>modules</b>. An array of string module names. The resolved modules are passed in this order as arguments to the callback function.</li>
+          <li><b>callback</b>. Callback function that receives the resolved modules in the requested order. Modules that failed to resolve are passed as undefined.</li>
+        </ul>
+        <pre><code class="javascript">CloudFlare.require(["foo", "bar", "baz"], function(foo, bar, baz) {
+  // If foo, bar and baz correspond to modules,
+  // they will be defined here.
+});</code></pre>
+        <h3>CloudFlare.define</h3>
+        <p>Defines a new module that can later be required. When you define a module, you provide a name for the module, an optional list of dependency modules and an initializer function that returns the module you are defining. Scripts corresponding to the list of module dependencies are guaranteed to load asynchronously, and in as few requests as possible.</p>
+        <pre><code class="javascript">CloudFlare.define(name, [dependencies,] initializer);</code></pre>
+        <ul>
+          <li><b>name</b>. The name of the defined module by which other other modules can require this one.</li>
+          <li><b>dependencies</b>. This is an optional array of dependencies. These dependencies will be resolved and passed as arguments to the initializer function in the order they are requested. Modules that failed to resolve are passed as undefined.</li>
+          <li><b>initializer</b>. This function will be called after all modules listed in dependencies have been resolved. It will receive any dependencies, if specified, as arguments in the order they were requested. The function is responsible for defining the module and will return an object representing the defined module, unless that module failed to be resolved on account of a thrown exception or not existing.</li>
+        </ul>
+        <pre><code class="javascript">CloudFlare.define("mymodule", ["foo", "bar"], function(foo, bar) {
+  function someMethod() {
+    return foo.fooMethod() + bar.CONSTANT;
+  };
+
+  return {
+    someMethod: someMethod
+  };
+});</code></pre>
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/styles/github.min.css
+
+">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script>
+    <script src="javascripts/scale.fix.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
