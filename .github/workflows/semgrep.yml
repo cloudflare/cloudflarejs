@@ -14,5 +14,4 @@ on:
 jobs:
   call-semgrep:
     uses: cloudflare/advisories/.github/workflows/semgrep.yml@main
-    secrets:
-      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+    secrets: inherit
