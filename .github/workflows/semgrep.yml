@@ -1,0 +1,17 @@
+name: Semgrep
+
+on:
+  pull_request: {}
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  call-semgrep:
+    uses: cloudflare/advisories/.github/workflows/semgrep.yml@main
+    secrets: inherit
