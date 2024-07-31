@@ -1,17 +1,23 @@
-name: Semgrep
-
-on:
-  pull_request: {}
-  workflow_dispatch: {}
-  push:
-    branches:
-      - main
-      - master
-
-permissions:
-  contents: read
-
-jobs:
-  call-semgrep:
-    uses: cloudflare/advisories/.github/workflows/semgrep.yml@main
-    secrets: inherit
+  on:
+    pull_request: {}
+    workflow_dispatch: {}
+    push: 
+      branches:
+        - main
+        - master
+  name: Minimal Semgrep config
+  jobs:
+    semgrep:
+      name: semgrep/ci
+      runs-on: ubuntu-20.04
+      env:
+        SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+        SEMGREP_URL: https://cloudflare.semgrep.dev
+        SEMGREP_APP_URL: https://cloudflare.semgrep.dev
+        SEMGREP_VERSION_CHECK_URL: https://cloudflare.semgrep.dev/api/check-version
+      container:
+        image: returntocorp/semgrep
+      steps:
+        - uses: actions/checkout@v3
+        - run: semgrep ci
+  `
