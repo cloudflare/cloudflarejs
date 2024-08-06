@@ -6,7 +6,7 @@
       branches:
         - main
         - master
-  name: Minimal Semgrep config 2
+  name: Semgrep config
   jobs:
     semgrep:
       name: semgrep/ci
